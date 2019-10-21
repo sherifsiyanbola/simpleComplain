@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class = "container">
+{% if messages %}
+    {% for message in messages %}
+<div class="alert alert-success" role="alert">
+  <strong>{{ message }}
+</div>
+    {% endfor %}
+{% endif %}
+
+</div>
+{% for complain in complains  %}
+
+    {% if complain %}
+    <div class = "container card p-4 mt-4">
+        <!-- Card for details -->
+    {% comment %} male card start {% endcomment %}
+    <div class="card my-2 mx-2 boy-card">
+      <div class="card-header">
+        <a href="{% url 'detail' complain.id %}" class="text-white header-link"
+          ><i class="fas fa-mars mr-2"></i> {{complain.title}} </a>
+      </div>
+      <div class="card-body pb-0">
+        <p>
+          <i class="fas fa-at mr-2"></i>
+          <a href="mailto:{{complain.email}}">{{complain.email}}</a>
+        </p>
+        <p><i class="fas fa-info-circle mr-2"></i> {{complain.complain}}</p>
+      </div>
+      <div class = "card-footer">
+        <p><i class="fas fa-info-circle mr-2"></i> Treated ?: {% if complain.treated == 'No' %}<b class = "text-danger">{{complain.treated}}</b>{% else %}<b class = "text-info">{{complain.treated}}</b>{% endif %} </button> </p>
+        {% if complain.treated == 'Yes' %}
+        <a href = "{% url 'viewcomp' complain.id %}" class = "btn btn-info disabled"  /> Edit </a>
+        {% else %}
+        <a href = "{% url 'viewcomp' complain.id %}" class = "btn btn-info" /> Edit </a>
+        {% endif %}
+        <a href = "{% url 'delete' complain.id %}" class = "btn btn-danger" /> Delete </a>
+      </div>
+    </div>
+    {% comment %} male card ends {% endcomment %}
+    <!-- Card for details ends -->
+    </div>
+
+    {% else %}
+
+    <h3>
+      You do not have any complains availabale
+    </h3>
+
+    {% endif %}
+    
+{% endfor %}
+{% endblock content %}

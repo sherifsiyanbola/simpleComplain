@@ -1,0 +1,96 @@
+{% load static %}
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+
+<title>
+Complaint Management System
+</title>
+
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static './css/main.css'%}" />
+
+    <!-- Fonts & Icons -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+
+    <nav class = "bg-primary">
+      <a class="logo" href="/">
+        <i class="fas fa-user-circle"></i>&nbsp;CMS
+      </a>
+      {% if request.user.is_authenticated %}
+       <a href ="{% url 'dashboard' %}" class = "mr-4 text-white">
+      Submit Complaint
+      </a>
+      <a href ="{% url 'logout' %}" class = "mr-4 text-white">
+      Logout
+      </a>
+      <a href ="{% url 'complains' %}" class = "mr-4 text-white">
+      &nbsp; View Complaints
+      </a>
+      {% else %}
+     <p class="feature-link m-0 p-0">
+ 
+      <a href ="{% url 'login' %}" class = "mr-4 text-white">
+      Login
+      </a>
+      </a>
+      {% endif %}
+
+      {% comment %} <a href ="" class = "mr-4 text-white">
+      <i class="fas fa-user-plus"></i> &nbsp; Sign Up
+      </a>
+      <a href ="" class = "mr-4 text-white">
+      <i class="fas fa-plus"></i> &nbsp; Add Contact
+      </a> {% endcomment %}
+      </p>
+    </nav>
+    <!-- Navbar ends -->
+    <br />
+    {% comment %} {% include 'partials/_message.html' %} {% endcomment %}
+    <div class="container">
+     {% if user.is_authenticated %}
+        <p>Welcome {{ user.username }} !!!</p>       
+    {% endif %}
+    <h3 class="heading font-weight-light text-center text-default"> <br> Complaint Management System</h3>
+    {% comment %} <center> <img src="{% static 'images/fud.jpg'%}" class="log" /></center> {% endcomment %}
+    {% comment %} {{contacts}} {% endcomment %}
+    <hr />
+    </div>
+    <!-- Main Section -->
+    {% block content %}
+    {% endblock content %}
+    <!-- Main Section ends-->
+
+    <!-- footer -->
+    <footer class="mt-4 p-2 bg-primary">
+      <p class="text-center p-1 m-0">&copy; 2019</p>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- footer ends -->
+  </body>
+</html>
